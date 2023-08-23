@@ -25,7 +25,7 @@ const SignUpForm = () => {
     <FormLayout title="Sign Up">
       <View style={styles.inputs}>
         <Input
-          onChangeText={inputHandler.bind("password")}
+          onChangeText={inputHandler.bind(this,"password")}
           value={formData.password}
           style={styles.input}
           label="password"
@@ -39,10 +39,10 @@ const SignUpForm = () => {
           }
         />
         <Input
-          onChangeText={inputHandler.bind("username")}
+          onChangeText={inputHandler.bind(this,"username")}
           value={formData.username}
           label="username"
-          placeholder="Enter your email"
+          placeholder="Enter your username"
           icon={
             <FontAwesome5
               name="user-alt"
@@ -53,7 +53,7 @@ const SignUpForm = () => {
         />
       </View>
 
-      <Button>Sign Up</Button>
+      <Button >Sign Up</Button>
     </FormLayout>
   );
 };

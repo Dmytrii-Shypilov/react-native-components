@@ -1,7 +1,7 @@
 import { TextInput, View, Text, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const Input = ({ label, onChangeText, placeholder, value, icon, style }) => {
+const Input = ({ label, onChangeText,onFocus, placeholder, value, icon, style }) => {
   return (
     <View style={[styles.container, style]}>
       <Text style={styles.label}>{label}</Text>
@@ -9,6 +9,7 @@ const Input = ({ label, onChangeText, placeholder, value, icon, style }) => {
         <TextInput
           style={styles.inputField}
           value={value}
+          onFocus={onFocus}
           onChangeText={onChangeText}
           placeholder={placeholder}
           placeholderTextColor='#ABB3BB'

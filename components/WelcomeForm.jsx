@@ -7,7 +7,7 @@ import Input from "../ui/Input";
 import FormLayout from "./FormLayout";
 import { useState } from "react";
 
-const WelcomeForm = () => {
+const WelcomeForm = ({setCurrentForm}) => {
   const [email, setEmail] = useState('')
 
   const inputHandler = (value) => {
@@ -25,7 +25,7 @@ const WelcomeForm = () => {
             <Foundation name="mail" size={22} color="rgba(37, 55, 112, 0.50)" />
           }
         />
-        <FlatButton>Have an Invite Code?</FlatButton>
+        <FlatButton onPress={()=> setCurrentForm('verification')}>Have an Invite Code?</FlatButton>
         <View style={styles.buttonsContainer}>
           <Button>Sign in / Sign up</Button>
           <Button

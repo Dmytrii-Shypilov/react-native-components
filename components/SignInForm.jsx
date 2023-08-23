@@ -6,7 +6,7 @@ import Input from "../ui/Input";
 import FormLayout from "./FormLayout";
 import { useState } from "react";
 
-const SignInForm = () => {
+const SignInForm = ({setCurrentForm}) => {
 const [password, setPassword] = useState('')
 
 const inputHandler = (value) => {
@@ -16,7 +16,7 @@ const inputHandler = (value) => {
   return (
     <FormLayout title="Enter Password">
         <Input value={password} label="password" placeholder="Enter your password" icon={<Ionicons name="key-sharp" size={22} color="rgba(37, 55, 112, 0.50)" />} />
-        <FlatButton>Forgot password</FlatButton>
+        <FlatButton onPress={()=> setCurrentForm("forgotPassword")}>Forgot password</FlatButton>
         <Button style={styles.button}>Sign In</Button>
     </FormLayout>
   );

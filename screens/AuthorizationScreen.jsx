@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Animated,
-  KeyboardAvoidingView
+  SafeAreaView,
 } from "react-native";
 import WelcomeForm from "../components/WelcomeForm";
 import SignInForm from "../components/SignInForm";
@@ -17,8 +17,8 @@ import ForgotPasswordForm from "../components/ForgotPasswordForm";
 
 const AuthorizationScreen = () => {
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
-  // const [animatedOpacity] = useState(() => new Animated.Value(1));
-  const animatedOpacity = useRef(new Animated.Value(1)).current
+  const [currentForm, setCurrentForm] = useState('signUp');
+  const animatedOpacity = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -27,7 +27,7 @@ const AuthorizationScreen = () => {
         setIsKeyboardVisible(true);
         Animated.timing(animatedOpacity, {
           toValue: 1,
-          duration: 100,
+          duration: e.duration,
           useNativeDriver: false,
         }).start();
       }
@@ -39,7 +39,7 @@ const AuthorizationScreen = () => {
         setIsKeyboardVisible(false);
         Animated.timing(animatedOpacity, {
           toValue: 1,
-          duration: 100,
+          duration: e.duration,
           useNativeDriver: false,
         }).start();
       }
@@ -64,20 +64,22 @@ const AuthorizationScreen = () => {
               justifyContent: isKeyboardVisible ? "flex-end" : "space-between",
             }}
           >
-           
-            {!isKeyboardVisible && <View style={{flex:1}}>
-            <Animated.Image
-              style={{ ...styles.image, opacity: animatedOpacity }}
-              source={require("../assets/img/logo.png")}
-            />
-            </View>}
-  
-            
-           {/* <SignInForm/> */}
-            {/* <WelcomeForm /> */}
-            {/* <SignUpForm/> */}
-            {/* <VerificationForm/> */}
-            <ForgotPasswordForm/>
+            {!isKeyboardVisible && (
+              <View style={{ flex: 1 }}>
+                <Animated.Image
+                  style={{ ...styles.image, opacity: animatedOpacity }}
+                  source={require("../assets/img/logo.png")}
+                />
+              </View>
+            )}
+
+            {currentForm === "signIn" && <SignInForm setCurrentForm={setCurrentForm}/>}
+            {currentForm === "welcome" && <WelcomeForm setCurrentForm={setCurrentForm} />}
+            {currentForm === "signUp" && <SignUpForm />}
+
+            {currentForm === "verification" && <VerificationForm />}
+
+            {currentForm === "forgotPassword" && <ForgotPasswordForm />}
           </View>
         </TouchableWithoutFeedback>
       </ImageBackground>
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
   image: {
     width: 175,
     height: 37,
-    marginTop: '35%'
+    marginTop: "35%",
   },
 });
 
